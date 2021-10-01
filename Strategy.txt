@@ -1,0 +1,18 @@
+Summary:
+A tiered approach to spawning and managing a spawn point from inception to end game based on a rooms controller level and utilizing manual building commands.
+
+Phase 1:
+Choose a spawn point.
+Spawn main loop will check the room controller that it is in.
+If the current room controller is less than level 2, spawn a BootBot.
+BootBot config: MOVE,CARRY,WORK (200 Cost)
+BootBot -> harvest nearest energy source -> Upgrade Room Controller until level 2 -> BootBot Self-terminates until controller is under level 2
+
+Phase 2:
+Spawn Checks Controller level is above 2
+Spawn Checks current creeps, if no creeps are active, spawn a basic worker.
+BasicWorker config: MOVE,CARRY,WORK
+BasicWorker -> harvest nearest energy source -> Deposit Energy at Spawn -> BasicWorker Self-terminates when Room.Structures.Storage > 1
+If spawn sees at least 2 basic workers, spawn at least 2 Basic Builder.
+Basic Builder config: MOVE,CARRY,WORK
+BasicBuilder -> harvest nearest energy source -> Deposit Energy at Spawn -> BasicWorker Self-terminates when Room.Structures.Storage > 1
